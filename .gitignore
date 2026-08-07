@@ -11,6 +11,9 @@ dev/
 *.log
 rtt_log.txt
 
+# ---- GitHub token (机密, 禁止上传!) ----
+token.txt
+
 # ---- IDE / 编辑器 ----
 .vscode/
 .idea/
