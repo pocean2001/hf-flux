@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>nRF52832 RTT 实时监控</title>
+<script src="/echarts.min.js"></script>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Segoe UI", "Microsoft YaHei", sans-serif;
+    background: #f0f4f8;
+    color: #1a2332;
+    padding: 16px;
+  }
+  .header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 14px; flex-wrap: wrap; gap: 10px;
+  }
+  .header h1 { font-size: 20px; font-weight: 600; }
+  .status-pill {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: #e8ecf2; border-radius: 20px; padding: 6px 14px; font-size: 13px;
+  }
+  .dot { width: 9px; height: 9px; border-radius: 50%; background: #9aa3b2; }
+  .dot.on { background: #22c55e; box-shadow: 0 0 6px #22c55e66; animation: pulse 1.5s infinite; }
+  .dot.err { background: #ef4444; }
+  @keyframes pulse { 50% { opacity: 0.4; } }
+
+  .cards {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px; margin-bottom: 14px;
+  }
+  .card {
+    background: #fff; border-radius: 12px; padding: 14px 16px;
+    box-shadow: 0 1px 4px rgba(16,24,40,.08); border: 1px solid #e4e9f0;
+  }
+  .card .label { font-size: 12px; color: #6b7485; margin-bottom: 6px; }
+  .card .value { font-size: 24px; font-weight: 700; font-variant-numeric: tabular-nums; }
+  .card .unit { font-size: 13px; font-weight: 400; color: #6b7485; margin-left: 2px; }
+  .card .sub { font-size: 11px; color: #9aa3b2; margin-top: 4px; }
+
+  .charts { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .chart-box {
+    background: #fff; border-radius: 12px; padding: 12px;
+    box-shadow: 0 1px 4px rgba(16,24,40,.08); border: 1px solid #e4e9f0;
+  }
+  .chart-box h3 { font-size: 13px; color: #4a5468; margin-bottom: 6px; font-weight: 600; }
+  .chart-box.full { grid-column: 1 / -1; }
+  .chart { width: 100%; height: 280px; }
+  @media (max-width: 900px) { .charts { grid-template-columns: 1fr; } }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>📡 nRF52832 RTT 实时监控</h1>
+  <div>
+    <span class="status-pill" id="status"><span class="dot" id="dot"></span><span id="statusText">连接中...</span></span>
+    <span class="status-pill" style="margin-left:8px">测量 <b id="measureNo" style="margin:0 4px">-</b> 次</span>
+  </div>
+</div>
+
+<div class="cards">
+  <div class="card"><div class="label">🌡 MCU 温度</div><div class="value"><span id="vMcU">--</span><span class="unit">°C</span></div><div class="sub" id="sMcU">-</div></div>
+  <div class="card"><div class="label">🌡 NTC 温度</div><div class="value"><span id="vNtc">--</span><span class="unit">°C</span></div><div class="sub" id="sNtc">-</div></div>
+  <div class="card"><div class="label">🎯 Tobj 估算</div><div class="value"><span id="vTobjEst">--</span><span class="unit">°C</span></div><div class="sub" id="sTobjEst">Ta + Q/U 热阻模型</div></div>
+  <div class="card"><div class="label">🎯 Tobj (DSP)</div><div class="value"><span id="vTobj">--</span><span class="unit">°C</span></div><div class="sub" id="sTobj">DSP 处理</div></div>
+  <div class="card"><div class="label">🏠 环境温度 Ta</div><div class="value"><span id="vTa">--</span><span class="unit">°C</span></div><div class="sub" id="sTa">传感器环境</div></div>
+  <div class="card"><div class="label">⚡ HF 电压</div><div class="value"><span id="vHfV">--</span><span class="unit">mV</span></div><div class="sub" id="sHfV">-</div></div>
+  <div class="card"><div class="label">🔥 HF 热流密度</div><div class="value"><span id="vHfF">--</span><span class="unit">mW/cm²</span></div><div class="sub" id="sHfF">-</div></div>
+</div>
+
+<div class="header" style="margin-top:-4px">
+  <div style="display:flex;align-items:center;gap:10px">
+    <span style="font-size:13px;color:#4a5468">U 等效热导率:</span>
+    <input type="range" id="uSlider" min="5" max="200" step="5" value="50" style="width:180px">
+    <b id="uVal" style="font-size:14px">50</b>
+    <span style="font-size:12px;color:#6b7485">W/(m²·K)</span>
+    <span style="font-size:11px;color:#9aa3b2">(Tobj ≈ Ta + Q/U)</span>
+  </div>
+</div>
+
+<div class="charts">
+  <div class="chart-box full">
+    <h3>温度趋势 (°C) — 实线:MCU/NTC/Ta, 虚线:Tobj估算/DSP</h3>
+    <div id="chartTemp" class="chart"></div>
+  </div>
+  <div class="chart-box">
+    <h3>热流电压 (mV)</h3>
+    <div id="chartHfV" class="chart"></div>
+  </div>
+  <div class="chart-box">
+    <h3>热流密度 (mW/cm²)</h3>
+    <div id="chartHfF" class="chart"></div>
+  </div>
+</div>
+
+<script>
+const MAX_POINTS = 100;
+
+// ---- ECharts 初始化 ----
+const tempChart = echarts.init(document.getElementById('chartTemp'));
+const hfvChart = echarts.init(document.getElementById('chartHfV'));
+const hffChart = echarts.init(document.getElementById('chartHfF'));
+
+function baseOption(title, unit, seriesList) {
+  return {
+    animation: false,
+    tooltip: { trigger: 'axis' },
+    legend: { data: seriesList.map(s => s.name), top: 0 },
+    grid: { left: 50, right: 20, top: 30, bottom: 30 },
+    xAxis: { type: 'category', data: [] },
+    yAxis: { type: 'value', name: unit, scale: true },
+    series: seriesList.map(s => ({
+      name: s.name, type: 'line', showSymbol: false,
+      smooth: true, data: [], lineStyle: { width: 2 }, ...s.opt || {}
+    }))
+  };
+}
+
+const tempOpt = baseOption('温度', '°C', [
+  { name: 'MCU', opt: { color: '#3b82f6' } },
+  { name: 'NTC', opt: { color: '#22c55e' } },
+  { name: 'Tobj估算', opt: { color: '#ef4444', lineStyle: { type: 'dashed', width: 2 } } },
+  { name: 'Tobj(DSP)', opt: { color: '#f97316', lineStyle: { type: 'dotted', width: 2 } } },
+  { name: 'Ta', opt: { color: '#f59e0b' } },
+]);
+const hfvOpt = baseOption('电压', 'mV', [
+  { name: 'HF 电压', opt: { color: '#8b5cf6' } },
+]);
+const hffOpt = baseOption('通量', 'mW/cm²', [
+  { name: 'HF 通量', opt: { color: '#06b6d4' } },
+]);
+tempChart.setOption(tempOpt);
+hfvChart.setOption(hfvOpt);
+hffChart.setOption(hffOpt);
+
+window.addEventListener('resize', () => {
+  tempChart.resize(); hfvChart.resize(); hffChart.resize();
+});
+
+// ---- U 参数调节 ----
+const uSlider = document.getElementById('uSlider');
+const uVal = document.getElementById('uVal');
+uSlider.addEventListener('input', () => {
+  uVal.textContent = uSlider.value;
+  fetch(`/set_u?value=${uSlider.value}`).catch(() => {});
+});
+// 启动时获取当前 U
+fetch('/get_u').then(r => r.json()).then(d => {
+  if (d.u) { uSlider.value = d.u; uVal.textContent = d.u; }
+}).catch(() => {});
+
+// ---- SSE 接收 ----
+const dataStore = { labels: [], mcu: [], ntc: [], tobj: [], tobjEst: [], ta: [], hfv: [], hff: [] };
+
+function pushSeries(arr, val) {
+  arr.push(val);
+  if (arr.length > MAX_POINTS) arr.shift();
+}
+
+function updateCharts() {
+  tempChart.setOption({
+    xAxis: { data: dataStore.labels },
+    series: [
+      { name: 'MCU', data: dataStore.mcu },
+      { name: 'NTC', data: dataStore.ntc },
+      { name: 'Tobj估算', data: dataStore.tobjEst },
+      { name: 'Tobj(DSP)', data: dataStore.tobj },
+      { name: 'Ta', data: dataStore.ta },
+    ]
+  });
+  hfvChart.setOption({ xAxis: { data: dataStore.labels }, series: [{ name: 'HF 电压', data: dataStore.hfv }] });
+  hffChart.setOption({ xAxis: { data: dataStore.labels }, series: [{ name: 'HF 通量', data: dataStore.hff }] });
+}
+
+function handleData(rec) {
+  if (rec.error) {
+    setStatus(false, '采集错误: ' + rec.error);
+    return;
+  }
+  setStatus(true, '运行中 · ' + rec.ts);
+  document.getElementById('measureNo').textContent = rec.measure;
+
+  const setVal = (id, v, unit) => {
+    const el = document.getElementById(id);
+    el.textContent = (v === null || v === undefined) ? '--' : v;
+    el.nextElementSibling.textContent = unit;
+  };
+  if (rec.mcu !== null) { setVal('vMcU', rec.mcu.toFixed(2), '°C'); document.getElementById('sMcU').textContent = '最新'; }
+  if (rec.ntc !== null) { setVal('vNtc', rec.ntc.toFixed(2), '°C'); document.getElementById('sNtc').textContent = '最新'; }
+  if (rec.tobj_est !== null && rec.tobj_est !== undefined) setVal('vTobjEst', rec.tobj_est.toFixed(2), '°C');
+  if (rec.tobj !== null && rec.tobj !== undefined && rec.tobj > 0) setVal('vTobj', rec.tobj.toFixed(2), '°C');
+  if (rec.ta !== null) setVal('vTa', rec.ta.toFixed(2), '°C');
+  if (rec.hf_volt !== null) setVal('vHfV', rec.hf_volt.toFixed(3), 'mV');
+  if (rec.hf_flux !== null) setVal('vHfF', rec.hf_flux.toFixed(4), 'mW/cm²');
+
+  dataStore.labels.push(rec.measure);
+  if (dataStore.labels.length > MAX_POINTS) dataStore.labels.shift();
+  pushSeries(dataStore.mcu, rec.mcu);
+  pushSeries(dataStore.ntc, rec.ntc);
+  pushSeries(dataStore.tobj, rec.tobj);
+  pushSeries(dataStore.tobjEst, rec.tobj_est);
+  pushSeries(dataStore.ta, rec.ta);
+  pushSeries(dataStore.hfv, rec.hf_volt);
+  pushSeries(dataStore.hff, rec.hf_flux);
+  updateCharts();
+}
+
+function setStatus(ok, text) {
+  const dot = document.getElementById('dot');
+  const st = document.getElementById('statusText');
+  dot.className = 'dot' + (ok ? ' on' : ' err');
+  st.textContent = text;
+}
+
+// 连接 SSE
+function connectSSE() {
+  const es = new EventSource('/events');
+  es.onopen = () => setStatus(true, '已连接 · 等待数据...');
+  es.onmessage = (e) => {
+    try { handleData(JSON.parse(e.data)); } catch (err) { /* ignore */ }
+  };
+  es.onerror = () => {
+    setStatus(false, '连接断开，重连中...');
+    es.close();
+    setTimeout(connectSSE, 2000);
+  };
+}
+connectSSE();
+</script>
+</body>
+</html>
