@@ -1,0 +1,2399 @@
+
+============================================================
+第 1 页
+============================================================
+
+J30D 
+Technical datasheet 
+JONDETECH INFRARED THERMOPILE SENSORS 
+www.jondetech.com  
+info@jondetech.se 
+  
+ 
+ 
+ 
+1 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+Highlights 
+Applications 
+ 
+• Full Digital Output With IIC Interface 
+• Small size, high reliability package 
+• Operating Temperature Range:  
+−20°C to +80°C 
+• 5 μA current In Sleep Mode 
+• Supply Voltage Range: 2.3V-3.6V 
+• Integrated PGA, 24-bit ADC and DSP 
+• Integrated ambient temperature 
+sensor with ±0.2°C (in 0°C -40°C) 
+ 
+• Human body temperature measurements 
+• Core temperature measurements 
+• Heat flux applications 
+ 
+ 
+ 
+
+============================================================
+第 2 页
+============================================================
+
+J30D 
+Technical datasheet 
+JONDETECH INFRARED THERMOPILE SENSORS 
+www.jondetech.com  
+info@jondetech.se 
+  
+ 
+ 
+ 
+2 
+ 
+General Description 
+The J30D is a digital product integrating a heat flux sensor together with a programmable gain amplifier 
+(PGA), a 24 bit ADC and DSP (for calibration/compensation). It also includes an ambient temperature 
+sensor. To store calibration/compensation parameters, a 128 byte EEPROM is available. 
+The all digital IIC interface supports standard and high-speed modes to facilitate the access of various 
+systems. The device can enter low-power sleep mode through instructions and has wake-up function. 
+ 
+ 
+
+============================================================
+第 3 页
+============================================================
+
+J30D 
+Technical datasheet 
+JONDETECH INFRARED THERMOPILE SENSORS 
+www.jondetech.com  
+info@jondetech.se 
+  
+ 
+ 
+ 
+3 
+ 
+Electrical characteristics 
+(VCC = 3.3V, TA = +25℃, PGA Gain = 64, unless otherwise noted. ) 
+Parameter 
+Symbol 
+Conditions. 
+Min. 
+Typ 
+Max. 
+Unit 
+Supply voltage 
+VCC 
+ 
+2.3 
+3.3 
+3.6 
+V 
+Power on reset 
+VCCPOR 
+ 
+ 
+1.77 
+ 
+V 
+Operating current 
+IVCC 
+Default config 
+ 
+700 
+800 
+uA 
+Sleep current 
+ISLEEP 
+ 
+ 
+5 
+ 
+uA 
+Reference voltage 
+VREF 
+ 
+1.08 
+1.1 
+1.12 
+V 
+Reference Voltage 
+Temperature 
+Drift 
+VREFDRIFT 
+ 
+ 
+30 
+ 
+ppm/°C 
+PGA Gain 
+GPGA 
+ 
+8 
+ 
+128 
+ 
+PGA Gain Error 
+GPGAERR 
+ 
+ 
+ 
+0.3% 
+ 
+ADC Resolution 
+ADCRES 
+ 
+ 
+24 
+ 
+Bits 
+Effective Resolution 
+ADCENOB 
+ 
+ 
+16 
+ 
+Bits 
+Oversampling 
+OSR 
+ 
+128 
+ 
+16384 
+ 
+EEPROM 
+Programming 
+voltage 
+VEEP 
+ 
+2.3 
+ 
+3.6 
+V 
+EEPROM 
+Programming time 
+TEEP 
+ 
+ 
+1.2 
+1.92 
+S 
+EEPROM 
+Programming cycles 
+CEEP 
+ 
+ 
+10k 
+ 
+ 
+I2C Frequency 
+FSCLK 
+ 
+ 
+ 
+400 
+kHz 
+Operating 
+temperature 
+TOP 
+ 
+-20 
+ 
+80 
+°C 
+CAUTION: These devices are sensitive to electrostatic discharge; follow proper IC Handling Procedures. 
+ 
+ 
+ 
+
+============================================================
+第 4 页
+============================================================
+
+J30D 
+Technical datasheet 
+JONDETECH INFRARED THERMOPILE SENSORS 
+www.jondetech.com  
+info@jondetech.se 
+  
+ 
+ 
+ 
+4 
+ 
+Heat-flux sensor characteristics 
+ 
+Parameter 
+Min. 
+Typ 
+Max. 
+Unit 
+Range 
+(+/-) 4.1 
+ 
+(+/-) 90 
+mW/cm2 
+Linearity (r²) 
+0.9999 
+ 
+ 
+- 
+Repeatability 
+ 
+ 
+0.24 
+mW/cm2 
+Relative accuracy 
+ 
+5.4 
+8.5 
+% (FS) 
+Absolute accuracy 
+ 
+4.8 
+7.6 
+mW/cm2 
+ 
+Temperature sensor characteristics 
+ 
+Parameter 
+Min. 
+Typ 
+Max. 
+Unit 
+Absolute accuracy 
+- 0.2 
+ 
+0.2 
+°C 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+============================================================
+第 5 页
+============================================================
+
+J30D 
+Technical datasheet 
+JONDETECH INFRARED THERMOPILE SENSORS 
+www.jondetech.com  
+info@jondetech.se 
+  
+ 
+ 
+ 
+5 
+ 
+Supply current characteristics 
+The amount of current a device consumes depends on several factors, such as the voltage it's operating 
+at, the surrounding temperature, the load on its input/output pins, how the device is configured 
+through its software, the frequencies at which it operates, and how often the I/O pins are switched on 
+and off. 
+ 
+In run mode, the device is always awake and continuously updates the registers as often as possible. 
+The major parameter affecting current consumption in run mode is fOSC setting.   
+ 
+ 
+ 
+ 
+ 
+0
+100
+200
+300
+400
+500
+600
+700
+800
+900
+1
+Supply current (VDD = 3.3V)
+fOSC = 0.6MHz
+fOSC = 1.2MHz
+
+============================================================
+第 6 页
+============================================================
+
+J30D 
+Technical datasheet 
+JONDETECH INFRARED THERMOPILE SENSORS 
+www.jondetech.com  
+info@jondetech.se 
+  
+ 
+ 
+ 
+6 
+ 
+In sleep mode, other parameters also come into consideration, such as oversampling rate. The more 
+oversampling, the better signal to noise ratio, but longer measurement times and hence longer active 
+time and increased current consumption.  
+ 
+ 
+ 
+So in sleep mode, different OSRP/OSRT gives the following: 
+ 
+Please note that sleep time (register 0x31) does not consider the actual measurement time. 
+If we use a OSRP = 16384, measurement time will be ~86ms. Setting sleep time to 0x00 = 100ms, the 
+device will measure for 86ms, sleep for 100ms and then repeat. 
+ 
+ 
+0
+10
+20
+30
+40
+50
+60
+70
+80
+90
+100
+128
+256
+512
+1024
+2048
+4096
+8192
+16384
+Active time (ms)
+Number of oversamples
+Measurement (active) time in sleep mode for different 
+oversampling rates (OSRT = OSRP)
+fOSC = 0.6MHz
+fOSC = 1.2MHz
+1
+10
+100
+1000
+0,1
+1
+10
+100
+Current (uA)
+Sleep time (s)
+Supply current consumption in sleep mode (VDD = 3.3V)
+OSRP - 128
+OSRP - 1024
+OSRP - 4096
+OSRP - 16384
+
+============================================================
+第 7 页
+============================================================
+
+J30D 
+Technical datasheet 
+JONDETECH INFRARED THERMOPILE SENSORS 
+www.jondetech.com  
+info@jondetech.se 
+  
+ 
+ 
+ 
+7 
+ 
+Block Diagram 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+============================================================
+第 8 页
+============================================================
+
+J30D 
+Technical datasheet 
+JONDETECH INFRARED THERMOPILE SENSORS 
+www.jondetech.com  
+info@jondetech.se 
+  
+ 
+ 
+ 
+8 
+ 
+Pin Definitions and Outline 
+ 
+ 
+ 
+ 
+Symbol 
+Pin 
+Pin Type 
+Description 
+- 
+1 
+NC 
+Do not connect 
+VDD 
+2 
+P 
+Power supply input pin, it should connect a 100nF to 1.0uF ceramic 
+cap at least to ground. 
+GND 
+3 
+P 
+Ground 
+- 
+4 
+NC 
+Do not connect 
+- 
+5 
+NC 
+Do not connect 
+SCL 
+6 
+I 
+I2C serial clock input, internally pull up by 500K resistor 
+SDA 
+7 
+I/O 
+I2C serial data input/output, internally pull up by 500K resistor 
+- 
+8 
+NC 
+Do not connect 
+ 
+ 
+ 
+1 
+2 
+3 
+4 
+5 
+6 
+7 
+8 
+1 
+2 
+3 
+4 
+8 
+7 
+6 
+5 
+
+============================================================
+第 9 页
+============================================================
+
+J30D 
+Technical datasheet 
+JONDETECH INFRARED THERMOPILE SENSORS 
+www.jondetech.com  
+info@jondetech.se 
+  
+ 
+ 
+ 
+9 
+ 
+Typical application circuit 
+ 
+IO voltage 
+The I2C IO voltage of the J30D is VDD. The SCL and SDA pins operate at the same voltage as VDD (3.3V nominal). 
+If the host microcontroller uses 1.8V IO levels, a bidirectional I2C level shifter is required on the SCL and SDA lines. The 
+supply voltage (VDD) to the J30D must remain according to specification regardless of the host IO voltage. A typical 
+application circuit is shown below: 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+============================================================
+第 10 页
+============================================================
+
+J30D 
+Technical datasheet 
+JONDETECH INFRARED THERMOPILE SENSORS 
+www.jondetech.com  
+info@jondetech.se 
+  
+ 
+ 
+ 
+10 
+ 
+Recommended land pattern 
+ 
+ 
+ 
+All dimension are in millimeters 
+ 
+ 
+ 
+3.5 
+1.3 
+3.4 
+3.2 
+4.4 
+1 
+1 
+1.6 
+0.96 
+0.72 
+0.7 
+0.4 
+0.5 
+1.05 
+
+============================================================
+第 11 页
+============================================================
+
+J30D 
+Technical datasheet 
+JONDETECH INFRARED THERMOPILE SENSORS 
+www.jondetech.com  
+info@jondetech.se 
+  
+ 
+ 
+ 
+11 
+ 
+Soldering recommendations 
+Wave soldering is the only recommended soldering method for the J30D. The use of a soldering iron or hot-air gun is not 
+recommended and may permanently damage the sensitive heat flux sensor element due to large localised temperature 
+transients. 
+The recommended wave solder temperature profile is shown below. The profile reflects the thermal constraints of the 
+integrated heat flux sensor and must be followed to ensure device integrity. 
+Recommended solder profile 
+ 
+ 
+Figure: Recommended wave solder temperature profile. Peak temperature 235°C at approximately t = 540s. 
+ 
+ 
+
+============================================================
+第 12 页
+============================================================
+
+J30D 
+Technical datasheet 
+JONDETECH INFRARED THERMOPILE SENSORS 
+www.jondetech.com  
+info@jondetech.se 
+  
+ 
+ 
+ 
+12 
+ 
+Important revision change 
+ 
+The asic used inside J30D has 2 input channels. The very early samples (no revision) 
+during 2025 used channel 2. Components acquired after November 2025 use channel 
+1.  Production units will contain revision information (1 and above). 
+ 
+Calibration Configuration 
+The J30D is calibrated in a specific operating configuration to account for the thermal 
+steady-state of the integrated ASIC. Since the ASIC is mounted in close thermal 
+contact with the JIRS30 sensor element, the ASIC power dissipation contributes a fixed 
+offset to the sensor output. This offset is compensated by the factory-derived 
+calibration parameter m. 
+To maintain calibration validity, JonDeTech recommends that the host system 
+operates the device using the register configuration listed in below. Deviating 
+significantly from these settings — using a shorter/longer sleep interval or higher 
+oversampling ratio — will alter the thermal steady-state of the ASIC and may 
+introduce a measurement offset. 
+ 
+Depending on the chip revision, different settings should be applied. 
+ 
+Very early samples (only calibration data k and m)  
+ 
+Register 
+Address 
+Value  
+Description 
+COMMAND 
+0x30 
+0x0A 
+ Dual channel mode (Ta-To1-
+To2)  
+SLEEP_TIME 
+0x31 
+0x00 
+Not used 
+SYS_CFG1 
+0x93 
+0x07 
+Filter off, I²C output, ambient 
+OSRT 16384 
+SYS_CFG2 
+0x94 
+0x81 
+ADC dithering and SWAP 
+SYS_CH1_CFG 
+0x95 
+0x2F 
+CH1 oversampling 16384, 
+gain ×64 
+SYS_CH2_CFG 
+0x96 
+0x2F 
+CH2 oversampling 16384, 
+gain ×64 
+BPS_CONFIG 
+0x97 
+0x0D 
+BIAS_CFG_5_16_AVDD 
+ 
+ 
+ 
+
+============================================================
+第 13 页
+============================================================
+
+J30D 
+Technical datasheet 
+JONDETECH INFRARED THERMOPILE SENSORS 
+www.jondetech.com  
+info@jondetech.se 
+  
+ 
+ 
+ 
+13 
+ 
+Revision 0xXX (No revision (0xFF or 0x00), Timestamp/UID and calibration data present)  
+ 
+Register 
+Address 
+Value  
+Description 
+COMMAND 
+0x30 
+0x08 
+ Single channel mode (Ta-
+To1)  
+SLEEP_TIME 
+0x31 
+- 
+Not used 
+SYS_CFG1 
+0x93 
+0x07 
+Filter off, I²C output, ambient 
+OSRT 16384 
+SYS_CFG2 
+0x94 
+0x81 
+ADC dithering and SWAP 
+SYS_CH1_CFG 
+0x95 
+0x2F 
+CH1 oversampling 16384, 
+gain ×64 
+SYS_CH2_CFG 
+0x96 
+- 
+Not used 
+BPS_CONFIG 
+0x97 
+0x0D 
+BIAS_CFG_5_16_AVDD 
+ 
+Rev 1 or higher 
+ 
+Register 
+Address 
+Value  
+Description 
+COMMAND 
+0x30 
+0x38 
+Single channel mode (Ta-
+To1) with sleep. 1.2MHz 
+SLEEP_TIME 
+0x31 
+0x0E 
+Sleep interval 1500 ms 
+SYS_CFG1 
+0x93 
+0x00 
+Filter off, I²C output, ambient 
+OSRT 512 
+SYS_CFG2 
+0x94 
+0x81 
+ADC dithering and SWAP 
+SYS_CH1_CFG 
+0x95 
+0x2E 
+CH1 oversampling 8192, gain 
+×64 
+SYS_CH2_CFG 
+0x96 
+0x2E 
+CH2 oversampling 8192, gain 
+×64 
+BPS_CONFIG 
+0x97 
+0x0D 
+BIAS_CFG_5_16_AVDD 
+ 
+ 
+ 
+
+============================================================
+第 14 页
+============================================================
+
+J30D 
+Technical datasheet 
+JONDETECH INFRARED THERMOPILE SENSORS 
+www.jondetech.com  
+info@jondetech.se 
+  
+ 
+ 
+ 
+14 
+ 
+Communication Interface 
+ 
+I2C 
+The I2C bus uses SCL and SDA as signal lines. Both of these lines are connected to VCC through a pull-up 
+resistor, and both remain high when not communicating. The IIC device address of J30D can be 
+configured through Chip_Address of register 0x92, and the IIC wildcard 7-bit address is 0x7F. The read 
+data register is polled directly at the time of high-rate reading, and the drdy status bit is read first and 
+then the data register is read when reading at low rate. 
+ 
+I2C Wildcard address: 
+ 
+ 
+
+============================================================
+第 15 页
+============================================================
+
+J30D 
+Technical datasheet 
+JONDETECH INFRARED THERMOPILE SENSORS 
+www.jondetech.com  
+info@jondetech.se 
+  
+ 
+ 
+ 
+15 
+ 
+The IIC communication protocol has special start (S) and termination (P) conditions. When SCL is at a 
+high level, the falling edge of SDA marks the beginning of data transmission. The IIC master device sends 
+the address (7 bits) of the slave device and the read/write control bit in turn. When the slave device 
+recognizes this address, it generates a response signal and pulls SDA low in the ninth cycle. After getting 
+the response from the slave, the master device continues to send the 8-bit register address and 
+continues to send or read data after getting the response. SCL is at high level, SDA has a rising edge 
+action to mark the end of IIC communication. In addition to the start and end flags, the data 
+transmitted by SDA must remain stable when SCL is high. The value transmitted by SDA can be changed 
+when SCL is low. All data transmission in IIC communication takes 8 bits as the basic unit. After every 8 
+bits of data transmission, a response signal is required to keep the transmission going. 
+ 
+ 
+ 
+I2C Timing diagram and characteristics 
+ 
+
+============================================================
+第 16 页
+============================================================
+
+J30D 
+Technical datasheet 
+JONDETECH INFRARED THERMOPILE SENSORS 
+www.jondetech.com  
+info@jondetech.se 
+  
+ 
+ 
+ 
+16 
+ 
+ 
+ 
+ 
+
+============================================================
+第 17 页
+============================================================
+
+J30D 
+Technical datasheet 
+JONDETECH INFRARED THERMOPILE SENSORS 
+www.jondetech.com  
+info@jondetech.se 
+  
+ 
+ 
+ 
+17 
+ 
+PWM 
+Its not recommended to use PWM mode. 
+ 
+Relay/INT 
+Relay/INT is multiplexed with the SDA pin, and SCL remains high. Relay output takes effect in normal 
+mode, and INT output takes effect in sleep mode. In Normal mode, the default configuration is To1cal ≥ 
+threshold + hysteresis, Relay output is high; To1cal ≤ threshold − hysteresis, Relay output is low. 
+Configurable Relay output polarity.   
+ 
+ 
+ 
+In Sleep mode, combined with the channel combination, see whether To1cal's ADC raw data is 
+compared or To1cal and To2cal are compared with the same threshold in order. If one meets the 
+interrupt condition, the interrupt can be triggered. The register can be configured to be higher than the 
+set threshold to trigger the interrupt or low Trigger an interrupt at the set threshold. The default 
+configuration INT is continuously high, and when the interrupt is triggered, it is pulled low, and returns 
+to high after 50ms.  
+ 
+
+============================================================
+第 18 页
+============================================================
+
+J30D 
+Technical datasheet 
+JONDETECH INFRARED THERMOPILE SENSORS 
+www.jondetech.com  
+info@jondetech.se 
+  
+ 
+ 
+ 
+18 
+ 
+Function Description 
+J30D contains a  is a highly integrated chip for voltage output sensor, such as thermopile, gas sensor.  
+It supports up to two-channel differential inputs and consists of four parts: analog front-end module, 
+built-in DSP and digital control logic, power supply and high-precision internal clock source, and 
+communication interface circuit. The block diagram is shown in below. 
+ 
+ 
+ 
+The analog front-end module includes a signal acquisition channel composed of instrument PGA and 
+24-bit sigma-delta ADC, and a built-in temperature sensor to collect sensor signals and temperature 
+with high precision.   
+Built-in DSP and digital control logic module includes control logic, built-in DSP, register table, EEPROM, 
+etc. Based on the built-in DSP, the sensor calibration algorithm can calibrate the sensor's zero point and 
+sensitivity below the second order temperature drift and up to the third order nonlinearity.  
+ 
+The chip configuration parameters, sensor calibration coefficients, and 25°C thermopile sensor V-T 
+table are stored in 128 bytes of EEPROM. J30D supports three digital interface modes at the same time: 
+IIC, PWM (single bus), INT or Relay output. 
+ 
+ 
+
+============================================================
+第 19 页
+============================================================
+
+J30D 
+Technical datasheet 
+JONDETECH INFRARED THERMOPILE SENSORS 
+www.jondetech.com  
+info@jondetech.se 
+  
+ 
+ 
+ 
+19 
+ 
+Power supply and Clock Module 
+ 
+J30D supports 2.3V to 3.6V VCC power supply input, built-in LDO converts VCC into 1.8V to supply 
+power for analog and digital circuits. DVDD power supply is reserved in sleep mode, and the typical 
+current is as low as 5uA. AVDD and DVDD can work after waiting 252us for VCC power supply. The 
+overall power distribution is shown below. 
+ 
+ 
+ 
+J30D has two clock sources, one is a low-frequency clock of 32kHz, and the other is a high-frequency 
+clock of 600kHz or 1.2MHz. The system clock is shown in the following figure. 
+ 
+ 
+Meanwhile, based on the working state machine of the system, as shown in the below figure, it is 
+recommended to wait for 2ms after powering on (waiting for POR and EEPROM to load) before 
+proceeding with IIC operation. During the operation of the state machine FSM, it is not recommended 
+to manipulate registers. It is recommended to configure registers in the IDLE state. 
+ 
+ 
+
+============================================================
+第 20 页
+============================================================
+
+J30D 
+Technical datasheet 
+JONDETECH INFRARED THERMOPILE SENSORS 
+www.jondetech.com  
+info@jondetech.se 
+  
+ 
+ 
+ 
+20 
+ 
+Main Signal Chain 
+ 
+The J30D signal measurement channel is composed of an input gate circuit MUX, an instrument-level 
+PGA, a 24-bit high-precision Sigma-Delta ADC, and a digital filter.  
+ 
+J30D has two sets of MUX: PGA input MUX and ADC input MUX. The PGA input MUX is used to switch 
+the CH1 and CH2 channels of the thermopile, and the ADC input MUX is used to switch the PGA output 
+and the internal temperature sensor output. When switching to the internal temperature sensor, the 
+reference voltage generated by the temperature sensor itself is used.   
+The Input Swap switch can be used alone to swap the input polarity. 
+ 
+ 
+ 
+The J30D uses a high-impedance input three-op-amp instrumentation operational amplifier with 
+chopping to reduce the input offset voltage and control the input leakage current below 200pA. Its gain 
+range includes 8x, 12x, 16x, 32x, 48x, 64x, 96x, 128x. 64x is recommended for human body temperature 
+measurement applications, and 8x is recommended for industrial applications.   
+PGA is a differential input and differential output structure. The output voltage can be expressed by the 
+following expression: 
+   
+VP_PGA =VCMin +GAIN_PGA*VDin/2 
+VN_PGA =VCMin −GAIN_PGA*VDin/2 
+ 
+VCMin and VDin are the common mode level and differential mode level of PGA input respectively. In 
+order to avoid the saturation  
+of the PGA's op amp output and the introduction of large errors, both VP_PGA and VN_PGA need to 
+satisfy the following expressions:   
+ 
+AGND + 0.3V < VP(N)_PGA < AVDD - 0.3V 
+ 
+ 
+ 
+
+============================================================
+第 21 页
+============================================================
+
+J30D 
+Technical datasheet 
+JONDETECH INFRARED THERMOPILE SENSORS 
+www.jondetech.com  
+info@jondetech.se 
+  
+ 
+ 
+ 
+21 
+ 
+It can be obtained from the above expression that the input common-mode voltage needs to meet the 
+following relationship: 
+ 
+AGND + 0.3V + GAIN_PGA*VDin(max)/2 < VCMin < AVDD – 0.3V – GAIN_PGA*Vdin(max)/2 
+ 
+Considering the inconsistency of sensor output, temperature drift, etc., it is recommended to choose a 
+suitable GAIN_P so that the  
+sensor differential output VDin(max) <0.8*Vref/GAIN_PGA, the above relationship can be satisfied. In 
+addition, the op amp input of  
+the PGA is a PMOS input, which also needs to satisfy the following expression: VIP(N) <AVDD -1V.  
+J30D has a simple digital potentiometer composed of resistors for thermopile bias. The recommended 
+configuration is 5/16×AVDD (AVDD=1.8V).   
+ 
+ 
+ 
+ 
+The ADC performs analog-to-digital conversion on the output of the PGA, and provides a 24-bit digital 
+output after passing through a digital filter. The ADC reference voltage (Vref) is 1.1V, and the allowable 
+differential input signal range is ±Vref/GAIN_PGA.  
+The expression of ADC output is  
+ 
+ 
+  
+ 
+
+============================================================
+第 22 页
+============================================================
+
+J30D 
+Technical datasheet 
+JONDETECH INFRARED THERMOPILE SENSORS 
+www.jondetech.com  
+info@jondetech.se 
+  
+ 
+ 
+ 
+22 
+ 
+The ADCraw of CH1 can be read from the data register DATA (Reg0x22, 0x23, 0x24), and the ADCraw of 
+CH2 can be read from the data register DATA (Reg0x25, 0x26, 0x27). When the sensor is calibrated, the 
+sensor signal can be collected in the bare data mode.  
+After the ADC is a digital filter, through  ‘OSR_P’ and  ‘OSR_T’  you can set the oversampling rate of the 
+signal chain during sensor signal acquisition and built-in temperature signal acquisition, ranging from 
+128X to 16384X. The relationship between the effective number of bits and the output noise is:  
+ENOBRMS =24 −log2 (RMSADC ) 
+RMSADC is ADC output noise (LSB).  
+ 
+The relationship between the effective number of bits ENOBRMS and the noise-free number of bits 
+ENOBNF is:  
+ENOBNF =ENOBRMS −2.7 
+ 
+The number of noise-free bits represents the number of bits that the output code has no jitter.  
+ 
+Internal Temperature Sensor 
+ 
+J30D has a built-in CMOS temperature sensor, which can not only measure the ambient temperature, 
+but also provides compensation information for subsequent DSP algorithms. The internal temperature 
+sensor can reach an accuracy of ±0.2°C in the temperature range of 0-40°C (affected by the package 
+wiring). The user does not need to do additional calibration.   
+The calibrated internal ambient temperature Ta=ADC_lsb/2^14 (°C). 
+ 
+Working Mode 
+After power-on, J30D can be configured with 0x30 register to realize different working modes, among 
+which sleep_en can switch between normal mode and sleep mode (low power mode), the initial state 
+of mode_sel is IDLE, and the required channel data can be flexibly selected by configuring mode_sel, 
+such as Ta -To1-To2 is a continuous output of CH1 data once at ambient temperature, once CH2 data 
+combination, and finally configure mode_en to trigger the state machine to work.  
+ 
+Operating Mode 
+Channel combination 
+Output 
+Normal mode 
+Ta-Ch1 (Single) 
+IIC/PWM/Relay 
+Ta-Ch1- Ch2 (Dual) 
+IIC 
+Ch1- Ch2 (fast dual) 
+IIC 
+Sleep mode 
+Ta-Ch1 (Single) 
+INT 
+Ta-Ch1-Ch2 (Dual) 
+INT 
+Ch1-Ch2 (fast dual) 
+INT 
+ 
+ 
+
+============================================================
+第 23 页
+============================================================
+
+J30D 
+Technical datasheet 
+JONDETECH INFRARED THERMOPILE SENSORS 
+www.jondetech.com  
+info@jondetech.se 
+  
+ 
+ 
+ 
+23 
+ 
+The figures below shows the timing diagram for Normal and Sleep mode 
+ 
+  
+ 
+ 
+ 
+ 
+ 
+
+============================================================
+第 24 页
+============================================================
+
+J30D 
+Technical datasheet 
+JONDETECH INFRARED THERMOPILE SENSORS 
+www.jondetech.com  
+info@jondetech.se 
+  
+ 
+ 
+ 
+24 
+ 
+EEPROM 
+ 
+J30D EEPROM is 128 bytes, used to store basic configuration and calibration coefficients.  
+The EEPROM default value is 0xFF, and the load time is 240.83us@1.2MHz or 481.67us@600KHz. The 
+total time of erasing and downloading is 120.19ms@1.2MHz or 240.37ms@600KHz. EEPROM will be 
+reloaded after Soft Reset. The content of the EEPROM is automatically loaded into the EERPOM register 
+during the power-on initialization phase. The user's write operation to the EEPROM register will  
+not directly modify the EEPROM value and send a specific EEPROM programming command to the 
+EE_PROG register to take effect.  
+Write 0x68 to the blow_start register (0x40) to start EEPROM programming and the programming ends 
+with EEPROM_loaded being set to 1.  
+ 
+ 
+ 
+
+============================================================
+第 25 页
+============================================================
+
+J30D 
+Technical datasheet 
+JONDETECH INFRARED THERMOPILE SENSORS 
+www.jondetech.com  
+info@jondetech.se 
+  
+ 
+ 
+ 
+25 
+ 
+Register Description 
+Normal Registers 
+ 
+Address 
+R/W 
+Bit 
+Addres
+s 
+Register Name 
+Default
+s 
+Describe 
+0x00  
+Soft Reset 
+W 
+7-6 
+ 
+2'b0 
+Reserved 
+4-3 
+ 
+2'b0 
+Reserved 
+1-0 
+ 
+2'b0 
+Reserved 
+5,2 
+SOFTRESET 
+1'b0 
+Write 1 to Bit 5 and Bit 2 to 
+reset entire chip, auto clear 
+to 0 after reset 
+0x02  
+Data_ready 
+R 
+7-4 
+ 
+4'b0 
+Reserved 
+3 
+Temp_drdy 
+1'b0 
+1'b1: Tobj data after DSP 
+ready 
+2 
+To2_drdy 
+1'b0 
+1'b1: To2 data after 
+calibration ready 
+1 
+To1_drdy 
+1'b0 
+1'b1: To1 data after 
+calibration ready 
+0 
+Ta_drdy 
+1'b0 
+1'b1: Ambient temperature 
+(internal temperature sensor) 
+Ta data after calibration 
+ready 
+0x03  
+Data_ready 
+R 
+7 
+ 
+1'b0 
+reserved 
+6 
+To2_raw_drdy 
+1'b0 
+1'b1: To2 raw data before 
+calibration ready 
+5 
+To1_raw_drdy 
+1'b0 
+1'b1: To1 raw data before 
+calibration ready 
+4 
+Ta_raw_drdy 
+1'b0 
+1'b1: Ambient temperature 
+(internal temperature sensor) 
+Ta raw data before calibration 
+ready 
+3-0 
+ 
+4'b0 
+reserved 
+0x04  
+error_code 
+R 
+7-2 
+ 
+6'b0 
+reserved 
+1 
+EEPROM_loaded 
+1'b0 
+1'b1: EEPROM loaded 
+0 
+ 
+1'b0 
+reserved 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+============================================================
+第 26 页
+============================================================
+
+J30D 
+Technical datasheet 
+JONDETECH INFRARED THERMOPILE SENSORS 
+www.jondetech.com  
+info@jondetech.se 
+  
+ 
+ 
+ 
+26 
+ 
+Address 
+R/W 
+Bit 
+Addres
+s 
+Register Name 
+Default
+s 
+Describe 
+0x10 
+DATA1_MSB 
+R 
+7-0 
+data1_out<23:16> 
+8'b0 
+Object temp out Tobj after 
+DSP and IIR filter, 2's 
+complement. 
+DATA1/2^14(°C) 
+0x11  
+DATA1_CSB 
+R 
+7-0 
+data1_out<15:8> 
+8'b0 
+0x12  
+DATA1_LSB 
+R 
+7-0 
+data1_out<7:0> 
+8'b0 
+0x16  
+TEMP_MSB 
+R 
+7-0 
+temp_value<23:16> 
+ 
+Ambient temp out (internal 
+temperature sensor) Ta data 
+after calibration, 2's 
+complement. TEMP/2^14(°C) 
+0x17  
+TEMP_CSB 
+R 
+7-0 
+temp_value<15:8> 
+ 
+0x18  
+TEMP_LSB 
+R 
+7-0 
+temp_value<7:0> 
+ 
+0x19 
+DATA1_CAL_MSB 
+R 
+7-0 
+data1_cal_out<23:16> 
+ 
+Channel 1 To1 data after 
+calibration, 2's complement. 
+Vtp data DATA1/2^16 
+(±128mV) DATA1/2^19 
+(±16mV) 
+0x1A 
+DATA1_CAL_CSB 
+R 
+7-0 
+data1_cal_out<15:8> 
+ 
+0x1B 
+DATA1_CAL_LSB 
+R 
+7-0 
+data1_cal_out<7:0> 
+ 
+0x1C 
+DATA2_CAL_MSB 
+R 
+7-0 
+data2_cal_out<23:16> 
+ 
+Channel 2 To2 data after 
+calibration, 2's complement. 
+Vtp data DATA2/2^16 
+(±128mV) DATA2/2^19 
+(±16mV) 
+0x1D 
+DATA2_CAL_CSB 
+R 
+7-0 
+data2_cal_out<15:8> 
+ 
+0x1E  
+DATA2_CAL_LSB 
+R 
+7-0 
+data2_cal_out<7:0> 
+ 
+0x22 
+DATA1_RAW 
+MSB 
+R 
+7-0 
+data1_raw_out<23:16> 
+ 
+Channel 1 To1 raw data 
+before calibration, 2's 
+complement. ADCraw 
+0x23 
+DATA1_RAW 
+CSB 
+R 
+7-0 
+data1_raw_out<15:8> 
+ 
+0x24 
+DATA1_RAW_LSB 
+R 
+7-0 
+data1_raw_out<7:0> 
+ 
+0x25 
+DATA2_RAW 
+MSB 
+R 
+7-0 
+data2_raw_out<23:16> 
+ 
+Channel 2 To2 raw data 
+before calibration, 2's 
+complement. ADCraw 
+0x26 
+DATA2_RAW 
+CSB 
+R 
+7-0 
+data2_raw_out<15:8> 
+ 
+0x27 
+DATA2_RAW 
+LSB 
+R 
+7-0 
+data2_raw_out<7:0> 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+============================================================
+第 27 页
+============================================================
+
+J30D 
+Technical datasheet 
+JONDETECH INFRARED THERMOPILE SENSORS 
+www.jondetech.com  
+info@jondetech.se 
+  
+ 
+ 
+ 
+27 
+ 
+Address 
+R/W 
+Bit 
+Addres
+s 
+Register Name 
+Default
+s 
+Describe 
+0x28 
+TEMP_RAW_MSB 
+R 
+7-0 
+temp_raw_value 
+<23:16> 
+ 
+Ambient temperature 
+(internal temperature sensor) 
+Ta raw data before 
+calibration, 2's complement. 
+0x29 
+TEMP_RAW_CSB 
+R 
+7-0 
+temp_raw_value 
+<15:8> 
+ 
+ 
+0x2A 
+TEMP_RAW_LSB 
+R 
+7-0 
+temp_raw_value 
+<7:0> 
+ 
+ADCraw 
+0x30  
+CMD 
+RW 
+7-6 
+ 
+2'b0 
+reserved 
+5 
+sleep_en 
+1'b0 
+1'b1 enter sleep mode; 1'b0 
+exit sleep mode. 
+4 
+clk_mode 
+1'b0 
+1'b0 600KHz; 1'b1 1.2MHz 
+3 
+mode_en 
+1'b0 
+1'b1 start FSM 
+2-0 
+mode_sel<2:0> 
+3'b0 
+3'b000/001: single-channel 
+continuous conversion (Ta-
+To1);  
+3'b010: dual channels 
+continuous conversion (Ta-
+To1-To2);  
+3'b011: fast-dual channel 
+mode (To1-To2) 
+0x31  
+Sleep_time 
+RW 
+7-0 
+Sleep_time<7:0> 
+8'b0 
+0x00: 100ms;  
+0x01: 200ms;  
+0x02: 300ms;  
+...  
+0xFF: 25.6s 
+0x40  
+BLOW_start 
+RW 
+7-2 
+Blow_start<5:0> 
+6'b0 
+Blow_start<5:0>==6'b01101
+0, to blow EEPROM. 
+1-0 
+ 
+2'b0 
+Reserved, 2'b00: Use auto 
+mode 
+ 
+ 
+ 
+
+============================================================
+第 28 页
+============================================================
+
+J30D 
+Technical datasheet 
+JONDETECH INFRARED THERMOPILE SENSORS 
+www.jondetech.com  
+info@jondetech.se 
+  
+ 
+ 
+ 
+28 
+ 
+EEPROM Registers 
+ 
+Address 
+R/W 
+Bit 
+Address 
+Register Name 
+Defaults 
+Describe 
+0x90  
+ID0 
+RW 
+7-0 
+ID0<7:0> 
+EE_0 
+Chip ID0 for customer 
+0x91  
+ID1 
+RW 
+7-0 
+ID1<7:0> 
+EE_1 
+Chip ID1 for customer 
+0x92  
+Chip_Address 
+RW 
+7 
+ 
+EE_2 
+Chip_Address<6:0>: IIC 
+Address. 7'h7F is an 
+always effective address 
+ 
+6-0 
+Chip_Address 
+<6:0> 
+ 
+ 
+0x93  
+System_Config_1 
+RW 
+7-5 
+FILT_COEF<2:0> 
+EE_3 
+IIR filter coefficient. 
+3'b000 disable IIR filter; 
+3'b001 suppress 17% of 
+signal;  
+3'b010 suppress 25% of 
+signal;  
+3'b011 suppress 50% of 
+signal;  
+3'b100 suppress 63% of 
+signal;  
+3'b101 suppress 75% of 
+signal;  
+3'b110 suppress 88% of 
+signal;  
+3'b111 suppress 94% of 
+signal. 
+4-3 
+output_mode 
+<1:0> 
+ 
+2'b00: IIC 
+2'b01: PWM 
+2'b10: Relay 
+2'b11: IIC. Latched after 
+EEPROM loaded. Changes 
+made to this will take 
+effect ONLY IF this value 
+is programmed to EEPROM 
+and then reset the chip. 
+2-0 
+OSR_T<2:0> 
+ 
+OSR for ambient 
+temperature 
+measurement. 000:512X, 
+011:1024X, 010:2048X, 
+011:4096X, 100:128X, 
+101:256X, 
+110:110:8192X, 
+111:16384X. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+============================================================
+第 29 页
+============================================================
+
+J30D 
+Technical datasheet 
+JONDETECH INFRARED THERMOPILE SENSORS 
+www.jondetech.com  
+info@jondetech.se 
+  
+ 
+ 
+ 
+29 
+ 
+Address 
+R/W 
+Bit 
+Address 
+Register Name 
+Defaults 
+Describe 
+0x94  
+System_Config_2 
+RW 
+7 
+adc_dither_en 
+EE_4 
+1'b1 enable ADC internal 
+dither 
+6 
+SERIAL_filter_en 
+ 
+1'b1 enable IIC input 
+deglitch filter 
+5-4 
+PGA_PWR<1:0> 
+ 
+Reserved. Trade-off 
+between power and noise. 
+3 
+Relay_OUT_Polarity 
+ 
+1'b0: output 1 when 
+higher than threshold. 
+1'b1: output 1 when lower 
+than threshold 
+2 
+SLEEP_OUT_Polarity 
+ 
+(IIC) Always output 1 
+when not trigger INT, 
+output 0 when trigger INT, 
+when trigger INT, leave 
+SLEEP_MODE. 1'b0: 
+trigger INT when temp is 
+higher than threshold; 
+default. 1'b1: trigger INT 
+when temp is lower than 
+threshold. 
+1 
+VT_SCALE 
+ 
+1'b0: ±16mV; 1'b1: 
+±128mV 
+0 
+input_swap 
+ 
+Set to 1 in case 
+Thermopile sensor +/- 
+bond to NSA3300 in 
+reverse manner 
+0x95  
+Channel1_Config 
+RW 
+7 
+ 
+EE_5 
+reserved 
+6 
+ 
+ 
+reserved 
+5-3 
+Gain_P<2:0> 
+ 
+000: gain=8, 
+001:gain=12, 
+010:gain=16, 
+011:gain=32, 
+100:gain=48, 
+101:gain=64, 
+110:gain=96, 
+111:gain=128 
+2-0 
+OSR_P<2:0> 
+ 
+000:512X, 011:1024X, 
+010:2048X, 011:4096X, 
+100:128X, 101:256X, 
+110:110:8192X, 
+111:16384X. 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+
+============================================================
+第 30 页
+============================================================
+
+J30D 
+Technical datasheet 
+JONDETECH INFRARED THERMOPILE SENSORS 
+www.jondetech.com  
+info@jondetech.se 
+  
+ 
+ 
+ 
+30 
+ 
+Address 
+R/W 
+Bit 
+Address 
+Register Name 
+Defaults 
+Describe 
+0x96  
+Channel2_Config 
+RW 
+7 
+ 
+EE_6 
+reserved 
+6 
+ 
+ 
+reserved 
+5-3 
+Gain_P<2:0> 
+ 
+000: gain=8, 
+001:gain=12, 
+010:gain=16, 
+011:gain=32, 
+100:gain=48, 
+101:gain=64, 
+110:gain=96, 
+111:gain=128 
+2-0 
+OSR_P<2:0> 
+ 
+000:512X, 011:1024X, 
+010:2048X, 011:4096X, 
+100:128X, 101:256X, 
+110:110:8192X, 
+111:16384X. 
+0x97  
+BPS_CONFIG 
+RW 
+7-4 
+ 
+EE_7 
+reserved 
+3-0 
+RES_DAC<3:0> 
+4'b1101 5/16*AVDD 
+(suggested) 
+0x9F  
+Tomax_1 
+RW 
+7-0 
+ 
+EE_15 
+Tomax_1: 
+To_max<15:8>; 
+Tomax_2: To_max<7:0>. 
+To_max<15:0> /64 
+mapping to real setting 
+maximum °C 
+0xA0  
+Tomax_2 
+RW 
+7-0 
+ 
+EE_16 
+0xA1  
+Tomin_1 
+RW 
+7-0 
+ 
+EE_17 
+Tomin_1: To_min<15:8>; 
+Tomin_2: To_min<7:0>. 
+To_min<15:0> /64 
+mapping to real setting 
+minimum °C 
+0xA2  
+Tomin_2 
+RW 
+7-0 
+ 
+EE_18 
+0xA3  
+PWMCTRL 
+RW 
+7-0 
+ 
+EE_19 
+Period of PWM output, 
+where 1x PWM period 
+stands for ~1706us. 0: 
+256x; 1: 1x; 2: 2x, ..., 
+255: 255x. 
+0xA4  
+Emissivity_1 
+RW 
+7-0 
+ 
+EE_20 
+Emissivity range 0.05 ~ 1. 
+Emissivity_1: 
+Emissivity<15:8>; 
+Emissivity_2: 
+Emissivity<7:0>. 
+LSB=2^15, 2's 
+complement, i.e. 
+0.05*2^15 -1 
+0xA5  
+Emissivity_2 
+RW 
+7-0 
+ 
+EE_21 
+0xA6  
+TCsens_1 
+RW 
+7-0 
+ 
+EE_22 
+TCsens range -0.5%/K ~ 
++0.5%/K. TCsens_1: 
+TCsens<15:8>; 
+TCsens_2: TCsens<7:0>. 
+LSB=2^22 
+i.e. 0.1%/K: 0.001*2^22 
+0xA7  
+TCsens_2 
+RW 
+7-0 
+ 
+EE_23 
+
+============================================================
+第 31 页
+============================================================
+
+J30D 
+Technical datasheet 
+JONDETECH INFRARED THERMOPILE SENSORS 
+www.jondetech.com  
+info@jondetech.se 
+  
+ 
+ 
+ 
+31 
+ 
+Address 
+R/W 
+Bit 
+Address 
+Register Name 
+Defaults 
+Describe 
+0xA8  
+T_threshold_1 
+RW 
+7-0 
+ 
+EE_24 
+Relay mode threshold. 
+T_threshold_1: 
+T_threshold<15:8>; 
+T_threshold_2: 
+T_threshold<7:0>. 
+LSB=mV*2^8 
+0xA9  
+T_threshold_2 
+RW 
+7-0 
+ 
+EE_25 
+0xAA  
+T_hyst_1 
+RW 
+7-0 
+ 
+EE_26 
+Relay mode hysteresis. 
+T_hyst_1: T_hyst<15:8>; 
+T_hyst_2: T_hyst<7:0>. 
+LSB=1mV*2^8 
+0xAB  
+T_hyst_2 
+RW 
+7-0 
+ 
+EE_27 
+0xAC 
+Threshold_sleep_MSB 
+RW 
+7-0 
+ 
+EE_28 
+Sleep mode INT threshold. 
+T_threshold_sleep<15:0>. 
+LSB=1mV*2^8 
+0xAD 
+Threshold_sleep_LSB 
+RW 
+7-0 
+ 
+EE_29 
+0xAE  
+CH1_OFF_MSB 
+RW 
+7-0 
+ 
+EE_30 
+Channel1 To1 calibration. 
+CH1_OFF<15:0>. 0x7FFF-
+>0.5*Vref=0.5*1.1->vtp= 
+0.5*1.1/PGAgain 
+0xAF  
+CH1_OFF_LSB 
+RW 
+7-0 
+ 
+EE_31 
+0xB0  
+CH1_GAIN_MSB 
+RW 
+7-0 
+ 
+EE_32 
+Channel1 To1 calibration. 
+CH1_GAIN<15:0>. 
+0xB1  
+CH1_GAIN_LSB 
+RW 
+7-0 
+ 
+EE_33 
+0xB2  
+CH1_KS_MSB 
+RW 
+7-0 
+ 
+EE_34 
+CH1_KS<11:4> 
+0xB3  
+CH1_KSS_MSB 
+RW 
+7-0 
+ 
+EE_35 
+CH1_KKS<11:4> 
+0xB4  
+CH1_KS_LSB 
+RW 
+7-4 
+ 
+EE_36 
+CH1_KS<3:0> 
+3-0 
+ 
+ 
+CH1_KSS<3:0> 
+0xB5  
+CH2_OFF_MSB 
+RW 
+7-0 
+ 
+EE_37 
+Channel2 To2 calibration. 
+CH2_OFF<15:0>. 
+0xB6  
+CH2_OFF_LSB 
+RW 
+7-0 
+ 
+EE_38 
+0xB7  
+CH2_GAIN_MSB 
+RW 
+7-0 
+ 
+EE_39 
+Channel2 To2 calibration. 
+CH2_GAIN<15:0>. 
+0xB8  
+CH2_GAIN_LSB 
+RW 
+7-0 
+ 
+EE_40 
+0xB9  
+CH2_KS_MSB 
+RW 
+7-0 
+ 
+EE_41 
+CH2_KS<11:4> 
+0xBA  
+CH2_KSS_MSB 
+RW 
+7-0 
+ 
+EE_42 
+CH2_KKS<11:4> 
+0xBB  
+CH2_KS_LSB 
+RW 
+7-4 
+ 
+EE_43 
+CH2_KS<3:0> 
+3-0 
+ 
+CH2_KSS<3:0> 
+
+============================================================
+第 32 页
+============================================================
+
+J30D 
+Technical datasheet 
+JONDETECH INFRARED THERMOPILE SENSORS 
+www.jondetech.com  
+info@jondetech.se 
+  
+ 
+ 
+ 
+32 
+ 
+Calibration data registers 
+Address  
+Register name 
+Size 
+Description 
+0xC0 
+Production timestamp MSB 
+uint32 
+Unix time stamp 
+0xC1 
+Production timestamp 
+0xC2 
+Production timestamp  
+0xC3 
+Production timestamp LSB 
+0xC4 
+Unique chip id MSB 
+uint32 
+4 byte number  
+unique device id 
+0xC5 
+Unique chip id second byte 
+0xC6 
+Unique chip id third byte 
+0xC7 
+Unique chip id LSB 
+0xC8 
+Chip revision 
+uint8 
+ 
+0xC9 
+Lot no MSB 
+uint16 
+ 
+0xCA 
+Lot no LSB 
+0xCB 
+Wafer no MSB 
+uint16 
+ 
+0xCC 
+Wafer no LSB 
+0xCD 
+Sensor offset 1 MSB (m) 
+U8Q8/S7Q8 2 
+Format 
+Q = ADCX*k ± m 1 
+0xCE 
+Sensor offset 1 LSB (m) 
+0xCF 
+Reserved 
+ 
+ 
+0xD0 
+Reserved 
+ 
+ 
+0xD1 
+Sensor gain 1 MSB (k) 
+U8Q8 Format 
+Q  = ADCX*k ± m 1 
+0xD2 
+Sensor gain 1 MSB (k) 
+0xD3 
+Reserved 
+ 
+ 
+0xD4 
+Reserved 
+ 
+ 
+0xD5 
+Sensor offset 2 MSB 
+U8Q8/S7Q8 2 
+Format 
+Not used 
+0xD6 
+Sensor offset 2 MSB 
+0xD7 
+Reserved 
+ 
+ 
+0xD8 
+Reserved 
+ 
+ 
+0xD9 
+Sensor gain 2 MSB 
+U8Q8 Format 
+Not used 
+0xDA 
+Sensor gain 2 LSB 
+0xDB 
+Reserved 
+ 
+ 
+0xDC 
+Reserved 
+ 
+ 
+0xDD 
+alpha MSB 
+S7Q8 Format 
+Not used 
+0xDE 
+alpha LSB 
+0xDF – 0xED 
+Reserved 
+ 
+ 
+0xEE 
+16-bit CRC MSB 3 
+ 
+CRC-CCITT (CRC16), 
+POLY: 0x8408 (X16 + 
+x12 + x5 + 1) 
+0xEF 
+16-bit CRC LSB 3 
+0xDF – 0xEF 
+Reserved 
+ 
+ 
+ 
+ 
+ 
+
+============================================================
+第 33 页
+============================================================
+
+J30D 
+Technical datasheet 
+JONDETECH INFRARED THERMOPILE SENSORS 
+www.jondetech.com  
+info@jondetech.se 
+  
+ 
+ 
+ 
+33 
+ 
+1 Early devices ((these devices do not have a Chip revision) use formula  
+Q  = ADCraw *k*1E-5 – m 
+ADCraw corresponds to raw digital ADC value.  
+ 
+ 
+  Devices with chip revision >= 1,  
+Q  = ADCX*k + m. 
+ADCX  = ADCmV (Raw ADC value expressed in millivolt)  
+ADCmV = ADCraw*1000*ADCREF/(PGA_GAIN*2^23)  
+where PGA_GAIN = 64,   ADCREF = 1.1 
+    
+2 Early devices ((these devices do not have a Chip revision) use U8Q8 format 
+  Devices with revision >=2 use the S7Q8 format 
+ 
+3 Production units (rev2 and higher) contains CRC 
+  Early samples before Nov 2025 has no production data. 
+  Samples after Nov2025 contains gain/offset1 and production timestamp and UID 
+ 
+U8Q8 Format 
+Range: 0 to 255.996 (integer part can range from 0 to 255) 
+Fractional part can represent values from 0 to just under 1. 
+Precision: 1/256 = approx 0.00390625 
+MSB represent integer part and LSB fractional part. 
+ 
+ 
+S7Q8 Format  
+Range: −128 to 127.996 (integer part can range from −128 to 127)  
+Fractional part can represent values from 0 to just under 1.  
+Precision: 1/256 ≈ 0.00390625 MSB represents the sign bit, followed by 7 integer bits, 
+and LSB the fractional part. 
+ 
+ 
+ 
+ 
+
+============================================================
+第 34 页
+============================================================
+
+J30D 
+Technical datasheet 
+JONDETECH INFRARED THERMOPILE SENSORS 
+www.jondetech.com  
+info@jondetech.se 
+  
+ 
+ 
+ 
+34 
+ 
+Example code 
+Please visit https://github.com/JonDeTech/JIRS30D_Reference 
+ 
+ 
+ 
+
+============================================================
+第 35 页
+============================================================
+
+J30D 
+Technical datasheet 
+JONDETECH INFRARED THERMOPILE SENSORS 
+www.jondetech.com  
+info@jondetech.se 
+  
+ 
+ 
+ 
+35 
+ 
+Revision history 
+ 
+Date 
+Description 
+2025-05-25 
+Initial version 
+2025-08-11 
+Added pin numbering 
+2025-09-25 
+Added register description 
+2025-11-18 
+Added function description 
+2025-12-12 
+Added custom calibration layout 
+Updated package drawing 
+2026-01-09 
+Update package drawing 
+2026-01-13 
+Update supply current characteristics 
+2026-01-16 
+Added land pattern 
+2026-04-17 
+Updated information about IO voltage 
+Added recommendation regarding soldering 
+2026-05-08 
+Added calibration configuration 
+Added typical application circuit 
+2026-05-25 
+Updated information about calibration registers 
+2026-06-08 
+Converted registers to clean tables 
+ 
