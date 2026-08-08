@@ -14,6 +14,9 @@ rtt_log.txt
 # ---- GitHub token (机密, 禁止上传!) ----
 token.txt
 
+# ---- 私有文档 (含内部标定信息, 禁止上传) ----
+README_private.md
+
 # ---- IDE / 编辑器 ----
 .vscode/
 .idea/
