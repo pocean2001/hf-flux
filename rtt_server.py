@@ -38,8 +38,14 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 #   Ta  : 环境温度 (°C) — 来自 J30D 内部温度传感器
 #   U   : 等效热导率 (W/m²·K) — 需按安装场景标定, 可通过 --u 或页面调节
 # 单位换算: 1 mW/cm² = 10 W/m²
+#
+# ★ U 标定依据 (人体应用场景):
+#   JIRS30 核心体温报告 (v1.1a) 实验室标定: 全局 U = 9.5 mW/(cm²·°C)
+#   = 95 W/(m²·K), 在加热台模拟人体 (36~39.5°C) + 手腕佩戴条件下,
+#   Tcbt = Tskin + Q/U 与参考温度相关系数 0.999。
+#   换算: 1 mW/(cm²·°C) = 10 W/(m²·K)  ⟹  9.5 → 95
 # ============================================================================
-DEFAULT_U = 50.0   # 默认等效热导率 W/(m²·K)
+DEFAULT_U = 95.0   # 人体应用标定值: 9.5 mW/(cm²·°C) = 95 W/(m²·K)
 U_VALUE = DEFAULT_U
 U_LOCK = threading.Lock()
 
@@ -242,7 +248,7 @@ class SSEHandler(BaseHTTPRequestHandler):
         from urllib.parse import urlparse, parse_qs
         qs = parse_qs(urlparse(self.path).query)
         try:
-            v = float(qs.get('value', ['50'])[0])
+            v = float(qs.get('value', ['95'])[0])
             set_u(v)
             self._send_headers('application/json')
             self.wfile.write(json.dumps({'ok': True, 'u': get_u()}).encode())
